@@ -1,0 +1,30 @@
+{
+  "name": "samizdat-fs",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "tape test.js | tap-spec"
+  },
+  "dependencies": {
+    "mkdirp": "^0.5.1",
+    "pull-glob": "^1.0.6",
+    "pull-stream": "^3.6.0",
+    "samizdat-spec": "^1.0.0",
+    "samizdat-ts": "^1.0.3"
+  },
+  "devDependencies": {
+    "rimraf": "^2.6.1",
+    "tap-spec": "^4.1.1",
+    "tape": "^4.8.0"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/pamphlets/samizdat-fs.git"
+  },
+  "bugs": {
+    "url": "https://github.com/pamphlets/samizdat-fs/issues"
+  },
+  "author": "Brecht Savelkoul <brecht@distilled.pm>",
+  "license": "GPL-3.0"
+}
