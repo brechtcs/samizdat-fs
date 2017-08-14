@@ -123,7 +123,28 @@ Samizdat.prototype.history = function (doc, cb) {
     if (err) {
       return cb(err)
     }
-    cb(null, versions)
+    cb(null, versions.sort())
+  })
+}
+
+Samizdat.prototype.latest = function (doc, cb) {
+  assert.equal(typeof doc, 'string' || 'number', 'Document ID must be a string or number')
+  assert.equal(typeof cb, 'function', 'Versions query callback must be a function')
+
+  var self = this
+
+  self.history(doc, function (err, versions) {
+    var key = versions[versions.length - 1]
+
+    self.read(key, function (err, value) {
+      if (err) {
+        return cb(err)
+      }
+      cb(null, {
+        key: key,
+        value: value
+      })
+    })
   })
 }
 
