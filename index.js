@@ -59,11 +59,11 @@ Samizdat.prototype.read = function (version, cb) {
   var doc = ts.getId(version)
   var file = path.join(this._root, doc, version)
 
-  fs.readFile(file, function (err, value) {
+  fs.readFile(file, 'utf8', function (err, value) {
     if (err) {
       return cb(err)
     }
-    cb(null, value.toString())
+    cb(null, value)
   })
 }
 
@@ -165,13 +165,13 @@ Samizdat.prototype.source = function (opts) {
           return cb(null, null)
         }
 
-        fs.readFile(file, function (err, value) {
+        fs.readFile(file, 'utf8', function (err, value) {
           if (err) {
             return cb(err)
           }
           cb(null, {
             key: path.basename(file),
-            value: value.toString()
+            value: value
           })
         })
       })
