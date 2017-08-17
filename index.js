@@ -6,13 +6,17 @@ var path = require('path')
 var pull = require('pull-stream')
 var ts = require('samizdat-ts')
 
-function Samizdat (dir) {
+function Samizdat (dir, opts) {
   if (!(this instanceof Samizdat)) {
     return new Samizdat(dir)
+  }
+  if (!opts) {
+    opts = {}
   }
   mkdir.sync(dir)
 
   this._root = dir
+  this._encoding = opts.encoding || 'utf8'
 }
 
 module.exports = Samizdat
@@ -59,7 +63,7 @@ Samizdat.prototype.read = function (version, cb) {
   var doc = ts.getId(version)
   var file = path.join(this._root, doc, version)
 
-  fs.readFile(file, 'utf8', function (err, value) {
+  fs.readFile(file, this._encoding, function (err, value) {
     if (err) {
       return cb(err)
     }
@@ -165,7 +169,7 @@ Samizdat.prototype.source = function (opts) {
           return cb(null, null)
         }
 
-        fs.readFile(file, 'utf8', function (err, value) {
+        fs.readFile(file, self._encoding, function (err, value) {
           if (err) {
             return cb(err)
           }
